@@ -2,13 +2,12 @@ package com.toan_itc.core.base.view
 
 import android.content.Context
 import android.os.Bundle
-import android.provider.Contacts.PresenceColumns.OFFLINE
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.toan_itc.core.R
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Toan.IT on 11/29/17.

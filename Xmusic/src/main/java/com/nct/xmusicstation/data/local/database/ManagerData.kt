@@ -11,7 +11,6 @@ import io.realm.Realm
  */
 
 interface RepositoryData {
-    fun getRealmBox(): Realm
 
     fun getRealmDB(): Realm
 

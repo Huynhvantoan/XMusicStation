@@ -3,7 +3,10 @@ package com.toan_itc.core.realm
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
-import io.realm.*
+import io.realm.Realm
+import io.realm.RealmModel
+import io.realm.RealmQuery
+import io.realm.Sort
 
 
 /**

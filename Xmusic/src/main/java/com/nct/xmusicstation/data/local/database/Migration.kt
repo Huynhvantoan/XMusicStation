@@ -8,8 +8,6 @@ import io.realm.RealmMigration
  * Email:Huynhvantoan.itc@gmail.com
  */
 class Migration : RealmMigration {
-    protected val BaoOnline_Realm = "BaoOnline.realm"
-    protected val RealmVersion = 1
     override fun migrate(dynamicRealm: DynamicRealm, l: Long, l1: Long) {
 
     }

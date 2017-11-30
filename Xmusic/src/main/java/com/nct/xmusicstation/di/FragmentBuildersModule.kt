@@ -1,7 +1,6 @@
 package com.nct.xmusicstation.di
 
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class FragmentBuildersModule {

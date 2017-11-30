@@ -3,10 +3,9 @@ package com.nct.xmusicstation.ui.login
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
-import android.arch.lifecycle.Transformations
 import android.databinding.ObservableField
 import com.nct.xmusicstation.data.HomeRepository
-
+import com.orhanobut.logger.Logger
 import com.toan_itc.core.base.BaseViewModel
 import com.toan_itc.core.base.view.StatefulLayout
 import javax.inject.Inject
@@ -19,9 +18,19 @@ internal constructor(homeRepository: HomeRepository) : BaseViewModel(), Lifecycl
     val message = ObservableField<String>()
 
 
+    override fun onCleared() {
+        super.onCleared()
+        Logger.e("onCleared")
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        Logger.e("ON_DESTROY")
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
-        // load data
+        Logger.e("ON_START")
         if (message.get() == null) loadData()
     }
 

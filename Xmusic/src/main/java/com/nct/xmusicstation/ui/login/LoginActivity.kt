@@ -3,7 +3,6 @@ package com.nct.xmusicstation.ui.login
 import android.arch.lifecycle.ViewModelProviders
 import android.view.LayoutInflater
 import com.nct.xmusicstation.databinding.LoginActivityBinding
-import com.nct.xmusicstation.ui.base.viewmodel.ViewModelFactory
 import com.toan_itc.core.base.BaseBindingActivity
 
 class LoginActivity : BaseBindingActivity<LoginViewModel, LoginActivityBinding>() , LoginView {

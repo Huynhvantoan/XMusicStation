@@ -1,7 +1,6 @@
 package com.toan_itc.core.base.widget
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
@@ -9,7 +8,6 @@ import android.os.Build
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
-
 import com.toan_itc.core.R
 
 class ToolbarIndicator(@param:DrawableRes @field:DrawableRes

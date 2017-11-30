@@ -19,29 +19,20 @@ import javax.inject.Inject
 class RealmManager
 @Inject
 constructor(private val downloadManager: DownloadManager) : RepositoryData {
-    private val mRealmConfigBox: RealmConfiguration
-    private val mRealmConfigDB: RealmConfiguration
+    private val mRealmConfig: RealmConfiguration
 
     init {
-        mRealmConfigDB = RealmConfiguration.Builder()
+        mRealmConfig = RealmConfiguration.Builder()
                 .name(Constants.DB_Realm)
-                .assetFile(Constants.DB_Realm)
-                .schemaVersion(Constants.RealmVersion)
-                .build()
-        mRealmConfigBox = RealmConfiguration.Builder()
-                .name(Constants.KCTBox_Realm)
-                .schemaVersion(Constants.RealmVersion)
                 .deleteRealmIfMigrationNeeded()
+                .migration(Migration())
+                .schemaVersion(Constants.RealmVersion)
                 .build()
-        Realm.setDefaultConfiguration(mRealmConfigDB)
-    }
-
-    override fun getRealmBox(): Realm {
-        return Realm.getInstance(mRealmConfigBox)
+        Realm.setDefaultConfiguration(mRealmConfig)
     }
 
     override fun getRealmDB(): Realm {
-        return Realm.getInstance(mRealmConfigDB)
+        return Realm.getDefaultInstance()
     }
 
     override fun insertDataSongNew(songNew: SongNew) {

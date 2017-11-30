@@ -1,12 +1,8 @@
 package com.toan_itc.core.base
 
-import android.graphics.drawable.Drawable
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-
 import com.toan_itc.core.R
 import com.toan_itc.core.base.widget.ToolbarIndicator
 

@@ -3,20 +3,18 @@ package com.nct.xmusicstation
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.liulishuo.filedownloader.FileDownloader
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection
-import com.orhanobut.logger.AndroidLogAdapter
-import com.orhanobut.logger.Logger
-import com.orhanobut.logger.PrettyFormatStrategy
 import com.nct.xmusicstation.data.local.prefs.PreferenceHelper
 import com.nct.xmusicstation.di.DaggerAppComponent
 import com.nct.xmusicstation.di.applyAutoInjector
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.PrettyFormatStrategy
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.toan_itc.core.imageload.ImagePipelineConfigFactory
 import dagger.android.support.DaggerApplication
 import io.realm.Realm
 import java.net.Proxy
-import java.security.AccessController.getContext
-import javax.inject.Inject
 
 
 class App : DaggerApplication() {

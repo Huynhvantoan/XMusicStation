@@ -8,8 +8,7 @@ package com.nct.xmusicstation.utils
 object Constants {
     var PATH_HDD = ""
     //DB
-    val DB_Realm = "KCT_DB.realm"
-    val KCTBox_Realm = "KCT_BOX.realm"
+    val DB_Realm = "XMusic.realm"
     val RealmVersion: Long = 1
     //Path
     val FOLDER_SOUND_FONT = "soundFont"

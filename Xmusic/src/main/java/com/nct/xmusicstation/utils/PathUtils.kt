@@ -1,10 +1,10 @@
 package com.nct.xmusicstation.utils
 
 import android.text.TextUtils.isEmpty
-import com.orhanobut.logger.Logger
 import com.nct.xmusicstation.App
 import com.nct.xmusicstation.BuildConfig
 import com.nct.xmusicstation.define.UpdateDef
+import com.orhanobut.logger.Logger
 import java.io.File
 
 /**

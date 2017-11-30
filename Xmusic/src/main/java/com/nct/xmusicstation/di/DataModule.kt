@@ -1,6 +1,5 @@
 package com.nct.xmusicstation.di
 
-import com.nct.xmusicstation.R
 import com.nct.xmusicstation.data.local.database.RealmManager
 import com.nct.xmusicstation.data.remote.download.DownloadManager
 import com.nct.xmusicstation.library.eventbus.RxBus
