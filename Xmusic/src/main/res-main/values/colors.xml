@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#31C27C</color>
+    <color name="colorPrimaryDark">#28a167</color>
+    <color name="colorAccent">#31C27C</color>
+
+    <!-- Common colors -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="trans_black">#cc000000</color>
+    <color name="light_gray">#f5f5f5</color>
+    <color name="gray">#656565</color>
+    <color name="dark_gray">#545454</color>
+    <color name="light_blue">#00b9ff</color>
+    <color name="blue">#00adef</color>
+    <color name="dark_blue">#0d94d6</color>
+    <color name="red">#FC1D00</color>
+    <color name="dark_red">#df1a00</color>
+    <color name="trans_blue">#ee0FA9F4</color>
+    <color name="trans_red">#eeFC1D00</color>
+    <color name="minor_trans_black">#55000000</color>
+    <color name="light_trans_black">#aa000000</color>
+    <color name="lighter_black">#111111</color>
+    <color name="trans_white">#15ffffff</color>
+    <color name="green">#317f72</color>
+    <color name="dark_green">#2F7366</color>
+
+    <!--App colors-->
+    <color name="theme_text">#ABAEAE</color>
+    <color name="theme_darkgreen">#31C27C</color>
+    <color name="background">#131C21</color>
+    <color name="text_black">#212121</color>
+    <color name="text_gray">#a4a4a4</color>
+    <color name="seekbar_bg">#aaaaaa</color>
+
+    <color name="page_indicator_bg">#15ffffff</color>
+    <color name="page_indicator_active">#31C27C</color>
+
+    <!--EditText-->
+    <color name="edittext_bg">#1Affffff</color>
+    <color name="edittext_hint">#4Dffffff</color>
+
+</resources>
