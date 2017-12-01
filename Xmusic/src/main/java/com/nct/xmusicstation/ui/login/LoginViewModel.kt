@@ -17,12 +17,6 @@ internal constructor(homeRepository: HomeRepository) : BaseViewModel(), Lifecycl
     val state = ObservableField<Int>()
     val message = ObservableField<String>()
 
-
-    override fun onCleared() {
-        super.onCleared()
-        Logger.e("onCleared")
-    }
-
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
         Logger.e("ON_DESTROY")
@@ -33,7 +27,6 @@ internal constructor(homeRepository: HomeRepository) : BaseViewModel(), Lifecycl
         Logger.e("ON_START")
         if (message.get() == null) loadData()
     }
-
 
     fun updateMessage() {
         var s = message.get()
