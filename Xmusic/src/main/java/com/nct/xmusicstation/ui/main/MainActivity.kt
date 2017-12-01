@@ -1,5 +1,6 @@
 package com.nct.xmusicstation.ui.main
 
+import android.arch.lifecycle.LifecycleObserver
 import android.view.LayoutInflater
 import com.nct.xmusicstation.databinding.LoginActivityBinding
 import com.nct.xmusicstation.ui.login.LoginView
@@ -7,6 +8,10 @@ import com.nct.xmusicstation.ui.login.LoginViewModel
 import com.toan_itc.core.base.BindingActivity
 
 class MainActivity : BindingActivity<LoginViewModel, LoginActivityBinding>() , LoginView {
+    override fun addObserver(): LifecycleObserver {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getLayoutRes(): Int {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

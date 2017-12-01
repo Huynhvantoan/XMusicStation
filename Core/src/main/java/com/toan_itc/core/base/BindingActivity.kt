@@ -1,5 +1,6 @@
 package com.toan_itc.core.base
 
+import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -28,9 +29,12 @@ abstract class BindingActivity<VM : BaseViewModel, DB : ViewDataBinding> : Dagge
 
     abstract fun getViewModel(): Class<VM>
 
+    abstract fun addObserver() : LifecycleObserver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
+        lifecycle.addObserver(addObserver())
     }
 }

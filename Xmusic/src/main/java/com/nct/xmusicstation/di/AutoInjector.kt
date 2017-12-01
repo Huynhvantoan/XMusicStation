@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
+import com.toan_itc.core.base.BaseBindingActivity
 import com.toan_itc.core.base.BindingActivity
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
@@ -46,15 +47,12 @@ fun Application.applyAutoInjector() = registerActivityLifecycleCallbacks(
 
 private fun handleActivity(activity: Activity) {
     when (activity) {
-        is BindingActivity<*, *> -> AndroidInjection.inject(activity)
+        is BaseBindingActivity<*, *> -> AndroidInjection.inject(activity)
         is FragmentActivity -> {
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(
                     object : FragmentManager.FragmentLifecycleCallbacks() {
-                        override fun onFragmentCreated(
-                                fm: FragmentManager,
-                                f: Fragment,
-                                savedInstanceState: Bundle
-                        ) {
+                        override fun onFragmentCreated(fm: FragmentManager?, f: Fragment?, savedInstanceState: Bundle?) {
+                            super.onFragmentCreated(fm, f, savedInstanceState)
                             AndroidSupportInjection.inject(f)
                         }
                     }, true)

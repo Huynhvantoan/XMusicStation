@@ -3,14 +3,14 @@ package com.nct.xmusicstation.ui.base
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import com.nct.xmusicstation.App
+import com.toan_itc.core.base.BaseBindingActivity
 import com.toan_itc.core.base.BaseViewModel
 import com.toan_itc.core.base.BindingActivity
 
-abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BindingActivity<VM, DB>() {
-    public override fun onCreate(savedInstanceState: Bundle?) {
+abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseBindingActivity<VM, DB>() {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
 
     public override fun onStart() {
         super.onStart()
