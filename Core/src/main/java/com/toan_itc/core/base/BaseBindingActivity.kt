@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 
 import com.toan_itc.core.BR
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 /**
  * Created by Toan.IT on 11/30/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
-abstract class BaseBindingActivity<T : BaseViewModel, B : ViewDataBinding> : CoreActivity(), BaseView {
+abstract class BaseBindingActivity<T : BaseViewModel, B : ViewDataBinding> : DaggerAppCompatActivity(), BaseView {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: T

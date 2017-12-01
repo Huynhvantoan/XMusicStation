@@ -101,8 +101,10 @@ object PreferenceHelper{
 
     fun put(key: String, value: Set<String>) = also { edit.putStringSet(key, value).commit() }
 
+    @Synchronized
     fun put(key: String, value: Any) = also { edit.putString(key, mGson.toJson(value)).commit() }
 
+    @Synchronized
     fun put(key: String, value: List<*>) = also { edit.putString(key, mGson.toJson(value)).commit() }
 
     fun <T> getEntity(key: String, classOfT: Class<T>): T? {
@@ -148,7 +150,6 @@ object PreferenceHelper{
     }
 
     operator fun <T> get(key: String, defaultValue: T): T? where T : Any {
-        Logger.e("aaa="+defaultValue.javaClass.typeName)
         return when (defaultValue) {
             String::class -> getString(key, defaultValue as String) as T?
             Int::class -> getInt(key, defaultValue as? Int ?: -1) as T?
