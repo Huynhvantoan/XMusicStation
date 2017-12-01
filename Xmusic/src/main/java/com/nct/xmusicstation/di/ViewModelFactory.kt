@@ -1,4 +1,4 @@
-package com.nct.xmusicstation.ui.base.viewmodel
+package com.nct.xmusicstation.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

@@ -1,8 +1,9 @@
-package com.nct.xmusicstation.di
+package com.nct.xmusicstation.di.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.nct.xmusicstation.ui.base.viewmodel.ViewModelFactory
+import com.nct.xmusicstation.di.ViewModelFactory
+import com.nct.xmusicstation.di.key.ViewModelKey
 import com.nct.xmusicstation.ui.login.LoginViewModel
 import dagger.Binds
 import dagger.Module

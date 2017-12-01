@@ -1,10 +1,12 @@
-package com.nct.xmusicstation.di
+package com.nct.xmusicstation.di.module
 
 import dagger.Module
 
 @Module
 abstract class FragmentBuildersModule {
-   /* @ContributesAndroidInjector
+   /*
+       @FragmentScope
+    @ContributesAndroidInjector
     internal abstract fun contributeBaseFragment(): CoreFragment
 */
     /*@ContributesAndroidInjector

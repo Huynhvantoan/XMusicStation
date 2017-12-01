@@ -1,4 +1,4 @@
-package com.nct.xmusicstation.di
+package com.nct.xmusicstation.di.key
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

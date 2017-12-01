@@ -1,14 +1,15 @@
-package com.nct.xmusicstation.ui.base.ui
+package com.nct.xmusicstation.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.nct.xmusicstation.App
+import com.nct.xmusicstation.library.snackbar.SnackbarEvent
 import com.orhanobut.logger.Logger
-import com.toan_itc.core.base.BaseBindingFragment
 import com.toan_itc.core.base.BaseViewModel
+import com.toan_itc.core.base.BindingFragment
 
-abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : BaseBindingFragment<T, B>() {
+abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : BindingFragment<VM, DB>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Logger.v("onCreate:" + this.javaClass.simpleName)
@@ -39,6 +40,6 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : BaseBindin
 
 
     private fun setupObservers() {
-       // viewModel.observeEvent<SnackbarEvent>(this, SnackbarEvent::class.java, { snackbarEvent -> showSnackbar(snackbarEvent.message) })
+        //viewModel.observeEvent<SnackbarEvent>(this, SnackbarEvent::class.java, { snackbarEvent -> showSnackbar(snackbarEvent.message) })
     }
 }

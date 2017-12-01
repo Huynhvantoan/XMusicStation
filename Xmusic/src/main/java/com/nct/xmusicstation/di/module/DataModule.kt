@@ -1,4 +1,4 @@
-package com.nct.xmusicstation.di
+package com.nct.xmusicstation.di.module
 
 import com.nct.xmusicstation.data.local.database.RealmManager
 import com.nct.xmusicstation.data.remote.download.DownloadManager

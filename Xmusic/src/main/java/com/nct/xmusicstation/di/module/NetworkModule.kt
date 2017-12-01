@@ -1,4 +1,4 @@
-package com.nct.xmusicstation.di
+package com.nct.xmusicstation.di.module
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson

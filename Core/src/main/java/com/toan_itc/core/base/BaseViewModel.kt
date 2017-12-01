@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
  * Created by Toan.IT on 11/30/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
+
 abstract class BaseViewModel : ViewModel(), Observable {
     @Transient
     private var mObservableCallbacks: PropertyChangeRegistry? = null

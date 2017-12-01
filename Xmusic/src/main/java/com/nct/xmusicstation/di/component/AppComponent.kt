@@ -1,6 +1,10 @@
-package com.nct.xmusicstation.di
+package com.nct.xmusicstation.di.component
 
 import com.nct.xmusicstation.App
+import com.nct.xmusicstation.di.module.ActivityBuildersModule
+import com.nct.xmusicstation.di.module.DataModule
+import com.nct.xmusicstation.di.module.NetworkModule
+import com.nct.xmusicstation.di.module.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

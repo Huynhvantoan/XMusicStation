@@ -2,25 +2,33 @@ package com.toan_itc.core.base
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
 /**
- * Created by Toan.IT on 11/30/17.
+ * Created by Toan.IT on 12/01/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
-abstract class CoreFragment<T : BaseViewModel> : Fragment(), BaseView {
-    lateinit var viewModel: T
-        private set
+abstract class CoreFragment : Fragment() {
+    private var mContentView: View? = null
 
-
-    val coreActivity: CoreActivity
-        get() = activity as CoreActivity
-
-
-    abstract fun setupViewModel(): T
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = setupViewModel()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (null == mContentView) {
+            mContentView = inflater.inflate(setLayoutResourceID(), container, false)
+        }
+        return mContentView
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        initData()
+    }
+
+    protected abstract fun initViews()
+
+    protected abstract fun setLayoutResourceID(): Int
+
+    protected abstract fun initData()
 }

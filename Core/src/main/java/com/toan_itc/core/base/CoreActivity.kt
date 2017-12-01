@@ -1,5 +1,6 @@
 package com.toan_itc.core.base
 
+import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -7,12 +8,18 @@ import com.toan_itc.core.R
 import com.toan_itc.core.base.widget.ToolbarIndicator
 
 /**
- * Created by Toan.IT on 11/30/17.
+ * Created by Toan.IT on 12/01/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
 abstract class CoreActivity : AppCompatActivity() {
     private var mToolbarHashCode = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(setLayoutResourceID())
+        initViews()
+        initData()
+    }
 
     /**
      * Setup main toolbar as ActionBar. Try to tint navigation icon based on toolbar's theme.
@@ -60,4 +67,11 @@ abstract class CoreActivity : AppCompatActivity() {
         mToolbarHashCode = toolbar.hashCode()
         return actionBar
     }
+
+    protected abstract fun initViews()
+
+    protected abstract fun setLayoutResourceID(): Int
+
+    protected abstract fun initData()
+
 }

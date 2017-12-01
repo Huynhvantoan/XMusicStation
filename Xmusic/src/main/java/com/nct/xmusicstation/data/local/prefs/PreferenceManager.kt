@@ -9,7 +9,6 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
-import com.orhanobut.logger.Logger
 import com.toan_itc.core.kotlinify.exceptions.InitializeException
 import java.util.*
 import kotlin.properties.ReadWriteProperty
