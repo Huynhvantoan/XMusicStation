@@ -1,88 +1,89 @@
 package com.nct.xmusicstation.network
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
-import com.nct.xmusicstation.data.remote.api.ApiResponse
-import com.nct.xmusicstation.ui.common.LiveRealmData
-import io.realm.RealmModel
-import io.realm.RealmResults
-import java.util.*
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 
 @Suppress("LeakingThis")
-abstract class NetworkBoundResource<Model : RealmModel, RequestType>
-@MainThread
-internal constructor() {
+abstract class NetworkBoundResource<ResultType, RequestType> @MainThread
+constructor() {
 
-    private val result = MediatorLiveData<Resource<RealmResults<Model>>>()
+    private val result = PublishSubject.create<Resource<ResultType>>()
 
     init {
-        result.setValue(Resource.loading(null))
         val dbSource = loadFromDb()
-        result.addSource(dbSource) { resultType ->
-            result.removeSource(dbSource)
-            if (shouldFetch(resultType)) {
-                fetchFromNetwork(dbSource)
-            } else {
-                result.addSource(dbSource) { newData -> setValue(Resource.success(newData)) }
-            }
-        }
-    }
+        dbSource.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({ value ->
+                    //unsubscribe
+                    dbSource.unsubscribeOn(Schedulers.io())
 
-    @MainThread
-    private fun setValue(newValue: Resource<RealmResults<Model>>) {
-        if (!Objects.equals(result.value, newValue)) {
-            result.value = newValue
-        }
-    }
-
-    private fun fetchFromNetwork(dbSource: LiveRealmData<Model>) {
-        val apiResponse = createCall()
-        // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-        result.addSource(dbSource, { newData -> setValue(Resource.loading(newData)) })
-        result.addSource(apiResponse) { response ->
-            result.removeSource(apiResponse)
-            result.removeSource(dbSource)
-            if (response!!.isSuccessful) {
-                ioThread {
-                    processResponse(response)?.let { saveCallResult(it) }
-                    mainThread {
-                        // we specially request a new live data,
-                        // otherwise we will get immediately last cached value,
-                        // which may not be updated with latest results received from network.
-                        result.addSource(loadFromDb(),
-                                { newData -> setValue(Resource.success(newData)) })
+                    if (shouldFetch(value)) {
+                        fetchFromNetwork()
+                    } else {
+                        result.onNext(Resource.success(value))
                     }
-                }
-            } else {
-                onFetchFailed()
-                result.addSource(dbSource)
-                { newData -> result.value = response.errorMessage?.let { Resource.error(it, newData) } }
-            }
-        }
+                })
+    }
+
+    private fun fetchFromNetwork() {
+        val apiResponse = createCall()
+        //send a loading event
+        result.onNext(Resource.loading(null))
+        apiResponse
+                .subscribeOn(Schedulers.from(NETWORK_EXECUTOR))
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({ response ->
+                    //unsubscribe apiResponse and dbSource (if any)
+                    apiResponse.unsubscribeOn(Schedulers.io())
+
+                    ioThread {
+                        saveCallResult(response)
+                        mainThread {
+                            // we specially request a new live data,
+                            // otherwise we will get immediately last cached value,
+                            // which may not be updated with latest results received from network.
+                            val dbSource = loadFromDb()
+                            dbSource.subscribeOn(Schedulers.from(NETWORK_EXECUTOR))
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .take(1)
+                                    .subscribe({
+                                        dbSource.unsubscribeOn(Schedulers.io())
+                                        result.onNext(Resource.success(it))
+                                    })
+                        }
+                    }
+
+                }, { error ->
+                    error.printStackTrace()
+                    onFetchFailed()
+                    result.onNext(Resource.error(error.localizedMessage, null))
+                })
+
+    }
+
+    fun asFlowable(): Flowable<Resource<ResultType>> {
+        return result.toFlowable(BackpressureStrategy.BUFFER)
     }
 
     protected open fun onFetchFailed() {}
-
-    fun asLiveData(): LiveData<Resource<RealmResults<Model>>> {
-        return result
-    }
-
-    @WorkerThread
-    private fun processResponse(response: ApiResponse<RequestType>): RequestType? {
-        return response.body
-    }
 
     @WorkerThread
     protected abstract fun saveCallResult(item: RequestType)
 
     @MainThread
-    protected abstract fun shouldFetch(data: RealmResults<Model>?): Boolean
+    protected abstract fun shouldFetch(data: ResultType?): Boolean
 
     @MainThread
-    protected abstract fun loadFromDb(): LiveRealmData<Model>
+    protected abstract fun loadFromDb(): Flowable<ResultType>
 
-    @MainThread
-    protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>
+    @WorkerThread
+    protected abstract fun createCall(): Flowable<RequestType>
+
 }

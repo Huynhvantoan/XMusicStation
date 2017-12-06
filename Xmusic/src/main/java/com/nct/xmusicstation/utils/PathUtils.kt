@@ -2,8 +2,6 @@ package com.nct.xmusicstation.utils
 
 import android.text.TextUtils.isEmpty
 import com.nct.xmusicstation.App
-import com.nct.xmusicstation.BuildConfig
-import com.nct.xmusicstation.define.UpdateDef
 import com.orhanobut.logger.Logger
 import java.io.File
 
@@ -208,37 +206,4 @@ fun isLocalImageSinger(linkImage: String): Boolean {
 fun isLocalImageFull(linkImage: String): Boolean {
     //Logger.d(isFileExists(pathLocalImageFull(linkImage))+"\npathIMAGE="+pathLocalImageFull(linkImage));
     return isFileExists(pathLocalImageFull(linkImage))
-}
-
-fun pathUpdate(type: Int, songID: Int, link: String, isMVUpload: String): String {
-    //Logger.d("pathUpdate="+type+"\n songID="+songID+"\n isMVUpload="+isMVUpload+"\n link="+link +"\n imageUpload="+imageUpload);
-    when (type) {
-        UpdateDef.FILE_BEAT -> return if (link.contains(Constants.FOLDER_AAC))
-            getSongPath() + File.separator + songID + Constants.SONG_ACC_EN_BEAT
-        else if (link.contains(Constants.FOLDER_MIDI))
-            getSongPath() + File.separator + songID + Constants.SONG_EN_MIDI
-        else
-            getSongPath() + File.separator + songID + Constants.SONG_EN_BEAT
-        UpdateDef.FILE_MP3 -> return if (link.contains(Constants.FOLDER_AAC))
-            getSongPath() + File.separator + songID + Constants.SONG_AAC
-        else
-            getSongPath() + File.separator + songID + Constants.SONG_MP3
-        UpdateDef.FILE_MV -> return getMvPath() + File.separator + songID + isMVUpload
-        UpdateDef.FILE_IMAGE -> return getImagePath() + File.separator + songID + Constants.IMG_INTRO
-        UpdateDef.FILE_IMAGE_UPLOAD -> return getImageUploadPath(link)
-        UpdateDef.FILE_LYRIC -> return getLyricPath() + File.separator + songID + Constants.LYRIC_EN_XML
-        UpdateDef.UPDATE_OK -> return link.replace(BuildConfig.LINK_MEDIA, getSongPathUpdate())
-        else -> return ""
-    }
-}
-
-fun pathUpdateLocal(pathOld: String): String {
-    var path = pathOld
-    path = path.replace(getSongPathUpdate() + File.separator, Constants.PATH_HDD)
-    return path.substring(0, path.lastIndexOf("/") + 1)
-}
-
-fun updateLocal(path: String): String {
-    Logger.e("MyPreference.getPathLocal():updateLocal=" + path.replace(BuildConfig.LINK_MEDIA + File.separator, Constants.PATH_HDD))
-    return path.replace(BuildConfig.LINK_MEDIA + File.separator, Constants.PATH_HDD)
 }

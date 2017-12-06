@@ -1,21 +1,21 @@
 package com.nct.xmusicstation.network
 
-import android.arch.lifecycle.LiveData
+import com.nct.xmusicstation.data.LoginRepository
 
 /**
  * Created by Toan.IT on 10/23/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
 
-class AbsentLiveData<T>
-private constructor() : LiveData<T>() {
+/*
+class AbsentLiveData private constructor(repository: LoginRepository, string: String) : RepoLiveData(repository, string) {
     init {
         postValue(null)
     }
 
     companion object {
-        fun <T> create(): LiveData<T> {
-            return AbsentLiveData()
+        fun create(repository: LoginRepository): AbsentLiveData {
+            return AbsentLiveData(repository, "")
         }
     }
-}
+}*/

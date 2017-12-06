@@ -1,6 +1,5 @@
 package com.nct.xmusicstation.binding
 
-import android.databinding.DataBindingComponent
 import android.support.v4.app.Fragment
 import com.toan_itc.core.imageload.ImageLoaderListener
 

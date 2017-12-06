@@ -1,14 +1,9 @@
 package com.nct.xmusicstation.ui.login
 
-import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Bundle
 import android.view.LayoutInflater
-import com.nct.xmusicstation.R
 import com.nct.xmusicstation.databinding.LoginActivityBinding
-import com.nct.xmusicstation.ui.base.BaseActivity
 import com.toan_itc.core.base.BaseBindingActivity
-import com.toan_itc.core.base.BindingActivity
 
 class LoginActivity : BaseBindingActivity<LoginViewModel, LoginActivityBinding>() , LoginView {
 

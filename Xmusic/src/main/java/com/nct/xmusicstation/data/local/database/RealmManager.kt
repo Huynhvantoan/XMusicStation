@@ -1,11 +1,8 @@
 package com.nct.xmusicstation.data.local.database
 
 
-import com.nct.xmusicstation.data.model.Home
-import com.nct.xmusicstation.data.model.SongNew
 import com.nct.xmusicstation.data.remote.download.DownloadManager
 import com.nct.xmusicstation.utils.Constants
-import com.toan_itc.core.realm.queryAllAsFlowable
 import io.reactivex.Flowable
 import io.realm.Realm
 import io.realm.RealmConfiguration

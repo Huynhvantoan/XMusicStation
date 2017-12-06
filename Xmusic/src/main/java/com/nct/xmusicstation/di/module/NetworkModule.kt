@@ -1,8 +1,6 @@
 package com.nct.xmusicstation.di.module
 
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.google.gson.*
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
 import com.nct.xmusicstation.BuildConfig
@@ -11,7 +9,7 @@ import com.nct.xmusicstation.data.remote.api.retrofit.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Credentials
+import io.realm.RealmObject
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
 import retrofit2.Retrofit
@@ -51,6 +49,15 @@ internal class NetworkModule {
         val builder = GsonBuilder()
         builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         builder.setDateFormat("yyyy-MM-dd HH:mm:ss")
+        builder.setExclusionStrategies(object : ExclusionStrategy {
+            override fun shouldSkipField(f: FieldAttributes): Boolean {
+                return f.declaringClass == RealmObject::class.java
+            }
+
+            override fun shouldSkipClass(clazz: Class<*>): Boolean {
+                return false
+            }
+        })
         return builder.create()
     }
 
@@ -70,8 +77,8 @@ internal class NetworkModule {
                 .log(Platform.INFO)
                 .request("request")
                 .response("response")
-                .addHeader("Authorization", Credentials.basic(BuildConfig.API_USER, BuildConfig.API_PASSWORD))
-                .addHeader("token", "3819efc20135c641eeda425b105cc922")
+                //.addHeader("Authorization", Credentials.basic(BuildConfig.API_USER, BuildConfig.API_PASSWORD))
+                //.addHeader("token", "3819efc20135c641eeda425b105cc922")
                 .build())
         return client.build()
     }

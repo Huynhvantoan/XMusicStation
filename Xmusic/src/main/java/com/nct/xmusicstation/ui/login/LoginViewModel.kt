@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.databinding.ObservableField
-import com.nct.xmusicstation.data.HomeRepository
+import com.nct.xmusicstation.data.LoginRepository
 import com.orhanobut.logger.Logger
 import com.toan_itc.core.base.BaseViewModel
 import com.toan_itc.core.base.view.StatefulLayout
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class LoginViewModel
 @Inject
-internal constructor(homeRepository: HomeRepository) : BaseViewModel(), LifecycleObserver {
+internal constructor(loginRepository: LoginRepository) : BaseViewModel(), LifecycleObserver {
 
     val state = ObservableField<Int>()
     val message = ObservableField<String>()

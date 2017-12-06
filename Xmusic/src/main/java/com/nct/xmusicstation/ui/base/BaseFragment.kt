@@ -4,7 +4,6 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.nct.xmusicstation.App
-import com.nct.xmusicstation.library.snackbar.SnackbarEvent
 import com.orhanobut.logger.Logger
 import com.toan_itc.core.base.BaseViewModel
 import com.toan_itc.core.base.BindingFragment

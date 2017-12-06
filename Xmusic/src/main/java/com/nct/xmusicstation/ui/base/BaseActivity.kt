@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.nct.xmusicstation.App
 import com.toan_itc.core.base.BaseBindingActivity
 import com.toan_itc.core.base.BaseViewModel
-import com.toan_itc.core.base.BindingActivity
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseBindingActivity<VM, DB>() {
     override fun onCreate(savedInstanceState: Bundle?) {

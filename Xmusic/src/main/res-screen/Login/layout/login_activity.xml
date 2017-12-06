@@ -1,41 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="view" type="com.nct.xmusicstation.ui.login.LoginView" />
+            name="view"
+            type="com.nct.xmusicstation.ui.login.LoginView" />
+
         <variable
-            name="viewModel" type="com.nct.xmusicstation.ui.login.LoginViewModel" />
+            name="viewModel"
+            type="com.nct.xmusicstation.ui.login.LoginViewModel" />
     </data>
 
-    <LinearLayout
+    <com.toan_itc.core.base.view.StatefulLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:animateLayoutChanges="true"
+        app:emptyLayout="@layout/placeholder_empty"
+        app:offlineLayout="@layout/placeholder_offline"
+        app:progressLayout="@layout/placeholder_progress"
+        app:state="@{viewModel.state}">
 
-        <com.toan_itc.core.base.view.StatefulLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            app:progressLayout="@layout/placeholder_progress"
-            app:offlineLayout="@layout/placeholder_offline"
-            app:emptyLayout="@layout/placeholder_empty"
-            app:state="@{viewModel.state}">
+            android:background="@color/background"
+            android:keepScreenOn="true">
 
-            <TextView
+            <ImageView
+                android:id="@+id/login_ivBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/bg_app" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:text="@{viewModel.message}"
-                app:onClick="@{() -> view.onClick()}"
-                app:onLongClick="@{() -> view.onLongClick()}"
-                tools:text="Hello" />
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        </com.toan_itc.core.base.view.StatefulLayout>
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="Để đăng nhập hãy truy cập vào trang:"
+                    android:textColor="@color/text_gray"
+                    android:textSize="20sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pad5"
+                    android:gravity="center"
+                    android:text="merchant.xmusicstation.com/code"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/pad30"
+                    android:gravity="center"
+                    android:text="Và nhập mã code:"
+                    android:textColor="@color/text_gray"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/login_tvCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/pad10"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="40sp"
+                    tools:text="123456" />
+
+                <com.nct.xmusicstation.library.custombutton.CircularProgressButton
+                    android:id="@+id/login_btnRenewCode"
+                    android:layout_width="140dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:cpb_colorIndicator="@color/colorPrimary"
+                    app:cpb_colorIndicatorBackground="@color/gray"
+                    app:cpb_colorProgress="@color/transparent"
+                    app:cpb_cornerRadius="@dimen/button_corners_radius"
+                    app:cpb_selectorComplete="@color/selector_round_button_color"
+                    app:cpb_selectorIdle="@color/selector_round_button_color"
+                    app:cpb_textComplete="Lấy code mới"
+                    app:cpb_textError="Lỗi, thử lại sau"
+                    app:cpb_textIdle="Lấy code mới" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </com.toan_itc.core.base.view.StatefulLayout>
 </layout>

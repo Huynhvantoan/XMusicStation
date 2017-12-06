@@ -6,6 +6,9 @@ apply plugin: 'realm-android'
 
 int MILLIS_IN_MINUTE = 1000 * 60
 int minutesSinceEpoch = System.currentTimeMillis() / MILLIS_IN_MINUTE
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def superpowered_sdk_path = properties.getProperty('superpowered.dir')
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -18,9 +21,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                arguments '-DANDROID_PLATFORM=android-16', '-DANDROID_TOOLCHAIN=clang', '-DANDROID_ARM_NEON=TRUE', '-DANDROID_STL=gnustl_static', "-DPATH_TO_SUPERPOWERED:STRING=${superpowered_sdk_path}"
+                cFlags '-O3', '-fsigned-char' // full optimization, char data type is signed
+                cppFlags '-fsigned-char', "-I${superpowered_sdk_path}"
             }
         }
     }
@@ -42,8 +51,8 @@ android {
             debuggable true
             minifyEnabled false
             buildConfigField("String", "APP_NAME", "\"XmusicStation\"")
-            buildConfigField("String", "BASE_URL", "\"http://api.karaokecuatui.vn/api/\"")
-            buildConfigField("String", "LINK_MEDIA", "\"http://kctobjobj.0dbfaf33.cdnviet.com\"")
+            buildConfigField("String", "BASE_URL", "\"https://xmusic-station.nhaccuatui.com/v1/\"")
+            buildConfigField("String", "BASE_URL_DEV", "\"http://123.30.134.153:8405/v1/\"")
             buildConfigField("String", "API_USER", "\"apikct\"")
             buildConfigField("String", "API_PASSWORD", "\"tqKviry6a3yPMj\"")
         }
@@ -53,8 +62,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     key_store.proguard_rules,key_store.proguard_rx,key_store.proguard_square,key_store.proguard_support
             buildConfigField("String", "APP_NAME", "\"XmusicStation\"")
-            buildConfigField("String", "BASE_URL", "\"http://api.karaokecuatui.vn/api/\"")
-            buildConfigField("String", "LINK_MEDIA", "\"http://kctobjobj.0dbfaf33.cdnviet.com\"")
+            buildConfigField("String", "BASE_URL", "\"https://xmusic-station.nhaccuatui.com/v1/\"")
             buildConfigField("String", "API_USER", "\"apikct\"")
             buildConfigField("String", "API_PASSWORD", "\"tqKviry6a3yPMj\"")
         }
@@ -106,9 +114,15 @@ android {
             ]
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
     externalNativeBuild {
         cmake {
-            path "CMakeLists.txt"
+            path 'src/main/jniLibs/CMakeLists.txt'
         }
     }
     dataBinding {

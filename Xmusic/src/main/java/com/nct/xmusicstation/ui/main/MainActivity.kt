@@ -1,7 +1,6 @@
 package com.nct.xmusicstation.ui.main
 
 import android.arch.lifecycle.LifecycleObserver
-import android.view.LayoutInflater
 import com.nct.xmusicstation.databinding.LoginActivityBinding
 import com.nct.xmusicstation.ui.login.LoginView
 import com.nct.xmusicstation.ui.login.LoginViewModel

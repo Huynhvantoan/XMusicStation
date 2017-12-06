@@ -6,7 +6,6 @@ import com.liulishuo.filedownloader.FileDownloader
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection
 import com.nct.xmusicstation.data.local.prefs.PreferenceHelper
 import com.nct.xmusicstation.di.applyAutoInjector
-import com.nct.xmusicstation.di.component.DaggerAppComponent
 import com.nct.xmusicstation.utils.ForegroundBackgroundListener
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -20,9 +19,14 @@ import java.net.Proxy
 
 
 class App : DaggerApplication() {
-    private var instance: App? = null
+  //  private var instance: App? = null
     private var mRefWatcher: RefWatcher? = null
     private lateinit var appObserver: ForegroundBackgroundListener
+
+    companion object {
+        lateinit var instance: App
+        private set
+    }
 
     fun getInstance(): App? {
         return instance

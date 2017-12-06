@@ -1,7 +1,5 @@
 package com.nct.xmusicstation.data.local.database
 
-import com.nct.xmusicstation.data.model.Home
-import com.nct.xmusicstation.data.model.SongNew
 import io.reactivex.Flowable
 import io.realm.Realm
 
