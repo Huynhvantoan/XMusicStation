@@ -1,11 +1,13 @@
 package com.nct.xmusicstation
 
+import android.arch.lifecycle.ProcessLifecycleOwner
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.liulishuo.filedownloader.FileDownloader
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection
 import com.nct.xmusicstation.data.local.prefs.PreferenceHelper
 import com.nct.xmusicstation.di.applyAutoInjector
 import com.nct.xmusicstation.di.component.DaggerAppComponent
+import com.nct.xmusicstation.utils.ForegroundBackgroundListener
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -20,6 +22,7 @@ import java.net.Proxy
 class App : DaggerApplication() {
     private var instance: App? = null
     private var mRefWatcher: RefWatcher? = null
+    private lateinit var appObserver: ForegroundBackgroundListener
 
     fun getInstance(): App? {
         return instance
@@ -53,6 +56,10 @@ class App : DaggerApplication() {
                 return BuildConfig.DEBUG
             }
         })
+        ProcessLifecycleOwner.get()
+                .lifecycle
+                .addObserver(ForegroundBackgroundListener()
+                .also { appObserver = it })
     }
 
     private fun setupData() {

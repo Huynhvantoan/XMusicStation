@@ -14,16 +14,16 @@ import javax.inject.Inject
  * Email:Huynhvantoan.itc@gmail.com
  */
 
-abstract class BaseBindingActivity<T : BaseViewModel, B : ViewDataBinding> : DaggerAppCompatActivity(), BaseView {
+abstract class BaseBindingActivity<VM : BaseViewModel, DB : ViewDataBinding> : DaggerAppCompatActivity(), BaseView {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: T
+    lateinit var viewModel: VM
         private set
-    lateinit var binding: B
+    lateinit var binding: DB
         private set
 
-    abstract fun setupViewModel(): T
-    abstract fun inflateBindingLayout(inflater: LayoutInflater): B
+    abstract fun setupViewModel(): VM
+    abstract fun inflateBindingLayout(inflater: LayoutInflater): DB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ abstract class BaseBindingActivity<T : BaseViewModel, B : ViewDataBinding> : Dag
         setContentView(binding.root)
     }
 
-    private fun setupBinding(inflater: LayoutInflater): B {
+    private fun setupBinding(inflater: LayoutInflater): DB {
         val binding = inflateBindingLayout(inflater)
         binding.setVariable(BR.view, this)
         binding.setVariable(BR.viewModel, viewModel)
